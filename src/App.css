@@ -1,0 +1,7 @@
+input,
+button {
+  border: 1px solid #bbb;
+  padding: 5px;
+  border-radius: 5px;
+  width: 300px;
+}
