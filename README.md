@@ -2,7 +2,7 @@
 
 평소에 궁금했던 기능들을 연습하는 연습실입니다!
 
-Demo[https://soyeon0116.github.io]
+Demo[https://soyeon0116.github.io/playground]
 
 ### 1. zod 라이브러리
 - 유효성 검사 진행 및 에러 로그 출력
