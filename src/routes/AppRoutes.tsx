@@ -7,7 +7,7 @@ import Home from '../pages/Home';
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path='/playground' element={<Home />} />
       <Route path='/Zod' element={<Zod />} />
       <Route path='/WebSocket' element={<WebSocketChat />} />
     </Routes>
