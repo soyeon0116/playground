@@ -1,26 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useMsgAlertStore } from '../store/msgAlertStore';
 
 export default function WebSocketChat() {
   const [msg, setMsg] = useState('');
   const [chatLog, setChatLog] = useState<string[]>([]);
-  const [alert, setAlert] = useState<string | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
+  const addMsg = useMsgAlertStore((state) => state.addMsg);
+  const clearMsg = useMsgAlertStore((state) => state.clearMsg);
+  const msgAlert = useMsgAlertStore((state) => state.newMsg);
 
   useEffect(() => {
     socketRef.current = new WebSocket('wss://ws.ifelse.io');
 
     socketRef.current.onmessage = (event) => {
       if (event.data.startsWith('Request served by')) return;
+      addMsg(event.data);
       setChatLog((prev) => [...prev, event.data]);
-      setAlert('📩 메시지 도착!');
+      // setAlert('📩 메시지 도착!');
 
-      setTimeout(() => setAlert(null), 3000);
+      setTimeout(() => clearMsg(), 3000);
     };
 
     return () => {
       socketRef.current?.close();
     };
-  }, []);
+  }, [addMsg, clearMsg]);
 
   const sendMsg = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,8 +36,8 @@ export default function WebSocketChat() {
 
   return (
     <div>
-      {alert && (
-        <div className='p-2 mt-2 bg-yellow-200 rounded-md'>{alert}</div>
+      {msgAlert && (
+        <div className='p-2 mt-2 bg-yellow-200 rounded-md'>📩 메시지 도착!</div>
       )}
       <form onSubmit={sendMsg}>
         <input
