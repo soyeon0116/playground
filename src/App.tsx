@@ -9,8 +9,8 @@ function App() {
   const msgAlert = useMsgAlertStore((state) => state.newMsg);
   return (
     <>
-      <div className='flex gap-3 h-screen'>
-        <nav className='w-[200px] border-r border-gray-500 p-2'>
+      <div className='h-screen'>
+        <nav className='w-[200px] h-full border-r border-gray-500 p-2 fixed left-0 top-0'>
           <div className='flex justify-between'>
             <h1>연습 리스트</h1>
             {msgAlert && <span className='bg-yellow-200 rounded-md'>✉️</span>}
@@ -24,8 +24,14 @@ function App() {
           >
             2. WebSocket 연습
           </Link>
+          <Link
+            to='/Jotai'
+            className='cursor-pointer hover:text-blue-500 block'
+          >
+            3. Jotai 연습
+          </Link>
         </nav>
-        <div className='p-2'>
+        <div className='p-2 ml-[200px]'>
           <AppRoutes />
         </div>
       </div>
