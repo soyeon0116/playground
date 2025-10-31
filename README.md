@@ -12,4 +12,6 @@ Demo[https://soyeon0116.github.io/playground]
 - zustand를 활용하여 상태관리
 - 공통 sidebar, 화면 하단 영역에 알림 표시
 
-
+### 3. Jotai 연습
+- 비동기 atom 활용
+- 페이지네이션, 무한 스크롤 탭분리
