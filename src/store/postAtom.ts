@@ -23,8 +23,18 @@ export const postAtom = atom<Promise<Post[]>>(async (get) => {
 });
 
 export const appendPostsAtom = atom(null, async (get, set) => {
+  const page = get(pageAtom);
   const newPosts = await get(postAtom);
   const current = get(allPostsAtom);
-  const merged = [...current, ...newPosts];
-  set(allPostsAtom, merged);
+  const isDuplicate = newPosts.every((post) =>
+    current.some((existing) => existing.id === post.id)
+  );
+  if (isDuplicate) return;
+
+  set(allPostsAtom, [...current, ...newPosts]);
+});
+
+export const resetPostsAtom = atom(null, (_, set) => {
+  set(pageAtom, 1);
+  set(allPostsAtom, []);
 });
