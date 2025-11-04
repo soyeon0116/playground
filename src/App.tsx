@@ -18,6 +18,9 @@ function App() {
           <Link to='/Zod' className='cursor-pointer hover:text-blue-500 block'>
             1. zod 연습
           </Link>
+          <Link to='/HookForm' className='cursor-pointer hover:text-blue-500 block'>
+            1-1. React Hook Form 연습
+          </Link>
           <Link
             to='/WebSocket'
             className='cursor-pointer hover:text-blue-500 block'

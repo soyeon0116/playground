@@ -15,7 +15,7 @@ const testZod = z
     path: ['job'],
   });
 
-export default function Zod() {
+export default function HookForm() {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [job, setJob] = useState('');
@@ -28,7 +28,6 @@ export default function Zod() {
     if (result.success) {
       setErrors({});
     } else {
-      console.log(job);
       let message: Record<string, string> = {};
       result.error.issues.forEach((v) => {
         const field = String(v.path[0]);
@@ -36,15 +35,7 @@ export default function Zod() {
       });
       setErrors(message);
     }
-
-    // if (result.success) {
-    //   setErrors([]);
-    // } else {
-    //   let message = result.error.issues.map((issue) => issue.message);
-    //   setErrors(message);
-    // }
   };
-
   return (
     <div>
       <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
@@ -74,11 +65,6 @@ export default function Zod() {
           </>
         )}
         <button type='submit'>submit</button>
-        {/* {errors.map((v, i) => (
-          <p key={i} style={{ color: 'red' }}>
-            {v}
-          </p>
-        ))} */}
       </form>
     </div>
   );

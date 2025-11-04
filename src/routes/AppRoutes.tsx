@@ -4,6 +4,7 @@ import Zod from '../pages/Zod';
 import WebSocketChat from '../pages/WebSocket';
 import Home from '../pages/Home';
 import Jotai from '../pages/Jotai';
+import HookForm from '../pages/HookForm';
 
 export default function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ export default function AppRoutes() {
       <Route path='/Zod' element={<Zod />} />
       <Route path='/WebSocket' element={<WebSocketChat />} />
       <Route path='/Jotai' element={<Jotai />} />
+      <Route path='/HookForm' element={<HookForm />} />
     </Routes>
   );
 }
