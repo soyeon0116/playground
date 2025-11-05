@@ -1,67 +1,42 @@
-import { useState } from 'react';
 import z from 'zod';
+import { testZod } from '../schemas/formSchema';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-const testZod = z
-  .object({
-    name: z
-      .string()
-      .min(4, '이름은 필수로 입력해야합니다.')
-      .regex(/^[^0-9]+$/, '이름에는 숫자를 포함할 수 없습니다'),
-    age: z.number().min(1, '나이는 필수로 입력해야합니다.'),
-    job: z.string().optional(),
-  })
-  .refine((data) => data.age < 20 || data.job, {
-    message: '20세 이상은 직업을 입력하세요',
-    path: ['job'],
-  });
+type FormDataState = z.infer<typeof testZod>;
 
 export default function HookForm() {
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [job, setJob] = useState('');
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormDataState>({
+    resolver: zodResolver(testZod),
+    defaultValues: {
+      name: '',
+      age: '',
+      job: '',
+    },
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const result = testZod.safeParse({ name, age: Number(age), job });
+  const age = watch('age');
 
-    if (result.success) {
-      setErrors({});
-    } else {
-      let message: Record<string, string> = {};
-      result.error.issues.forEach((v) => {
-        const field = String(v.path[0]);
-        message[field] = v.message;
-      });
-      setErrors(message);
-    }
+  const onSubmit = (data: FormDataState) => {
+    console.log('데이터:', data);
   };
+
   return (
     <div>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
-        <input
-          type='text'
-          placeholder='이름'
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
-        <input
-          type='number'
-          placeholder='나이'
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-        />
-        {errors.age && <p style={{ color: 'red' }}>{errors.age}</p>}
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-3'>
+        <input type='text' placeholder='이름' {...register('name')} />
+        {errors.name && <p style={{ color: 'red' }}>{errors.name.message}</p>}
+        <input type='text' placeholder='나이' {...register('age')} />
+        {errors.age && <p style={{ color: 'red' }}>{errors.age.message}</p>}
         {Number(age) >= 20 && (
           <>
-            <input
-              type='text'
-              placeholder='직업'
-              value={job}
-              onChange={(e) => setJob(e.target.value)}
-            />
-            {errors.job && <p style={{ color: 'red' }}>{errors.job}</p>}
+            <input type='text' placeholder='직업' {...register('job')} />
+            {errors.job && <p style={{ color: 'red' }}>{errors.job.message}</p>}
           </>
         )}
         <button type='submit'>submit</button>
