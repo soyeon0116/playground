@@ -5,6 +5,7 @@ import WebSocketChat from '../pages/WebSocket';
 import Home from '../pages/Home';
 import Jotai from '../pages/Jotai';
 import HookForm from '../pages/HookForm';
+import Jest from '../pages/Jest';
 
 export default function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function AppRoutes() {
       <Route path='/WebSocket' element={<WebSocketChat />} />
       <Route path='/Jotai' element={<Jotai />} />
       <Route path='/HookForm' element={<HookForm />} />
+      <Route path='/Jest' element={<Jest />} />
     </Routes>
   );
 }

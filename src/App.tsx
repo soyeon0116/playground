@@ -18,7 +18,10 @@ function App() {
           <Link to='/Zod' className='cursor-pointer hover:text-blue-500 block'>
             1. zod 연습
           </Link>
-          <Link to='/HookForm' className='cursor-pointer hover:text-blue-500 block'>
+          <Link
+            to='/HookForm'
+            className='cursor-pointer hover:text-blue-500 block'
+          >
             1-1. React Hook Form 연습
           </Link>
           <Link
@@ -32,6 +35,9 @@ function App() {
             className='cursor-pointer hover:text-blue-500 block'
           >
             3. Jotai 연습
+          </Link>
+          <Link to='/Jest' className='cursor-pointer hover:text-blue-500 block'>
+            3. Jest 연습
           </Link>
         </nav>
         <div className='p-2 ml-[200px]'>
