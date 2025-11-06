@@ -7,6 +7,10 @@ Demo[https://soyeon0116.github.io/playground]
 ### 1. zod 라이브러리
 - 유효성 검사 진행 및 에러 로그 출력
 
+  1-1. React Hook Form 연습
+  - RHF를 활용한 form 관리
+  - zodResolver를 사용하여 유효성 검사
+
 ### 2. WebSocket 연습
 - 'wss://ws.ifelse.io' 활용
 - zustand를 활용하여 상태관리
