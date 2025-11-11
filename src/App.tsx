@@ -37,7 +37,7 @@ function App() {
             3. Jotai 연습
           </Link>
           <Link to='/Jest' className='cursor-pointer hover:text-blue-500 block'>
-            3. Jest 연습
+            4. Jest 연습
           </Link>
         </nav>
         <div className='p-2 ml-[200px]'>
