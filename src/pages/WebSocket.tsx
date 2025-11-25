@@ -3,7 +3,9 @@ import { useMsgAlertStore } from '../store/msgAlertStore';
 
 export default function WebSocketChat() {
   const [msg, setMsg] = useState('');
-  const [chatLog, setChatLog] = useState<string[]>([]);
+  const [chatLog, setChatLog] = useState<
+    { text: string; from: 'me' | 'other' }[]
+  >([]);
   const socketRef = useRef<WebSocket | null>(null);
   const addMsg = useMsgAlertStore((state) => state.addMsg);
   const clearMsg = useMsgAlertStore((state) => state.clearMsg);
@@ -15,8 +17,7 @@ export default function WebSocketChat() {
     socketRef.current.onmessage = (event) => {
       if (event.data.startsWith('Request served by')) return;
       addMsg(event.data);
-      setChatLog((prev) => [...prev, event.data]);
-      // setAlert('📩 메시지 도착!');
+      setChatLog((prev) => [...prev, { text: event.data, from: 'other' }]);
 
       setTimeout(() => clearMsg(), 3000);
     };
@@ -30,28 +31,48 @@ export default function WebSocketChat() {
     e.preventDefault();
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
       socketRef.current.send(msg);
+      setChatLog((prev) => [...prev, { text: msg, from: 'me' }]);
       setMsg('');
     }
   };
 
   return (
-    <div>
+    <div className='relative'>
       {msgAlert && (
-        <div className='p-2 mt-2 bg-yellow-200 rounded-md'>📩 메시지 도착!</div>
+        <div className='p-2 mt-2 bg-yellow-200 rounded-md fixed top-0 right-2 w-[69%]'>
+          📩 메시지 도착!
+        </div>
       )}
-      <form onSubmit={sendMsg}>
-        <input
-          type='text'
-          name='message'
-          value={msg}
-          onChange={(e) => setMsg(e.target.value)}
-        />
-        <button type='submit'>전송</button>
-      </form>
-      <div>
-        {chatLog.map((v, i) => (
-          <p key={i}>{v}</p>
-        ))}
+      <div className='flex flex-col gap-3'>
+        <div
+          className='w-full h-[92vh] overflow-y-auto flex flex-col gap-2'
+          id='msgBox'
+        >
+          {chatLog.map((v, i) => (
+            <div
+              key={i}
+              className={`px-3 py-2 rounded-lg max-w-[70%] break-words ${
+                v.from === 'me'
+                  ? 'bg-blue-500 text-white ml-auto'
+                  : 'bg-gray-200 text-black mr-auto'
+              }`}
+            >
+              {v.text}
+            </div>
+          ))}
+        </div>
+        <form onSubmit={sendMsg} className='flex gap-3'>
+          <input
+            className='w-[80%]'
+            type='text'
+            name='message'
+            value={msg}
+            onChange={(e) => setMsg(e.target.value)}
+          />
+          <button className='w-[20%]' type='submit'>
+            전송
+          </button>
+        </form>
       </div>
     </div>
   );
