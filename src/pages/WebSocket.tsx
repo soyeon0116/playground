@@ -48,18 +48,22 @@ export default function WebSocketChat() {
           className='w-full h-[92vh] overflow-y-auto flex flex-col gap-2'
           id='msgBox'
         >
-          {chatLog.map((v, i) => (
-            <div
-              key={i}
-              className={`px-3 py-2 rounded-lg max-w-[70%] break-words ${
-                v.from === 'me'
-                  ? 'bg-blue-500 text-white ml-auto'
-                  : 'bg-gray-200 text-black mr-auto'
-              }`}
-            >
-              {v.text}
-            </div>
-          ))}
+          {chatLog.length === 0 ? (
+            <p className='text-gray-400'>메시지를 입력해보세요.</p>
+          ) : (
+            chatLog.map((v, i) => (
+              <div
+                key={i}
+                className={`px-3 py-2 rounded-lg max-w-[70%] break-words ${
+                  v.from === 'me'
+                    ? 'bg-blue-500 text-white ml-auto'
+                    : 'bg-gray-200 text-black mr-auto'
+                }`}
+              >
+                {v.text}
+              </div>
+            ))
+          )}
         </div>
         <form onSubmit={sendMsg} className='flex gap-3'>
           <input
