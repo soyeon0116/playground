@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
 import { useMsgAlertStore } from './store/msgAlertStore';
 import MsgAlertModal from './components/MsgAlertModal';
+import BoardRoutes from './routes/BoardRoutes';
 
 function App() {
   const msgAlert = useMsgAlertStore((state) => state.newMsg);
@@ -15,14 +16,20 @@ function App() {
             <h1>연습 리스트</h1>
             {msgAlert && <span className='bg-yellow-200 rounded-md'>✉️</span>}
           </div>
-          <Link to='/Zod' className='cursor-pointer hover:text-blue-500 block'>
-            1. zod 연습
-          </Link>
           <Link
-            to='/HookForm'
+            to='/board'
             className='cursor-pointer hover:text-blue-500 block'
           >
-            1-1. React Hook Form 연습
+            5. 게시판 만들기
+          </Link>
+          <Link to='/Jest' className='cursor-pointer hover:text-blue-500 block'>
+            4. Jest 연습
+          </Link>
+          <Link
+            to='/Jotai'
+            className='cursor-pointer hover:text-blue-500 block'
+          >
+            3. Jotai 연습
           </Link>
           <Link
             to='/WebSocket'
@@ -31,17 +38,18 @@ function App() {
             2. WebSocket 연습
           </Link>
           <Link
-            to='/Jotai'
+            to='/HookForm'
             className='cursor-pointer hover:text-blue-500 block'
           >
-            3. Jotai 연습
+            1-1. React Hook Form 연습
           </Link>
-          <Link to='/Jest' className='cursor-pointer hover:text-blue-500 block'>
-            4. Jest 연습
+          <Link to='/Zod' className='cursor-pointer hover:text-blue-500 block'>
+            1. zod 연습
           </Link>
         </nav>
         <div className='p-2 ml-[200px]'>
           <AppRoutes />
+          <BoardRoutes />
         </div>
       </div>
       {msgAlert && <MsgAlertModal />}
