@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://soyeon0116.github.io/playground",
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@hookform/resolvers": "^5.2.2",
     "@mui/x-data-grid": "^8.20.0",
     "@testing-library/dom": "^10.4.1",
