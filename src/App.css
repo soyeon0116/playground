@@ -6,3 +6,16 @@ button {
   width: 300px;
   cursor: pointer;
 }
+.rdg {
+  --rdg-background-color: #fff;
+  --rdg-color: #000;
+  --rdg-header-background-color: #fff;
+  --rdg-header-color: #000;
+  --rdg-row-hover-background-color: #e6f7ff;
+  --rdg-row-hover-color: #000;
+  text-align: center;
+  cursor: pointer;
+}
+.rdg-cell {
+  border-bottom: 1px solid #ccc;
+}
