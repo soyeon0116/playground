@@ -1,3 +1,4 @@
+export const USER = 'user';
 export const posts = [
   {
     id: 1,
