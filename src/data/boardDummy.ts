@@ -25,3 +25,16 @@ export const posts = [
     comments: [{ id: 1, author: 'user', text: '오~~' }],
   },
 ];
+export interface BoardTypes {
+  id: number;
+  title: string;
+  author: string;
+  content: string;
+  comments: BoardComments[];
+}
+
+export interface BoardComments {
+  id: number;
+  author: string;
+  text: string;
+}
